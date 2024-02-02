@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const plantinesSchema = new Schema({
+const productSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -9,16 +9,17 @@ const plantinesSchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
     },
     image: {
         type: String,
-        required: false,
+    },
+    price: {
+        type: Number,
     },
 });
 
-plantinesSchema.plugin(uniqueValidator);
+productSchema.plugin(uniqueValidator);
 
-const Plantines = model("Plantines", plantinesSchema);
+const Product = model("Product", productSchema);
 
-module.exports = Plantines;
+module.exports = Product;

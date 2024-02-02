@@ -1,29 +1,30 @@
 const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
-require("./mongo");
-const Plantines = require("./models/plantines");
+require("./MongoDB");
+const Product = require("./models/product");
 
 const typeDefs = `#graphql
-    type Plantin {
+    type Product {
         name: String!
         description: String
         image: String
+        price: Float
     }
 
     type Query {
-        plantinesCount: Int!
-        allPlantines: [Plantin]
-        findPlantin(name:String!): Plantin
+        productsCount: Int!
+        allProducts: [Product]
+        findProduct(name:String!): Product
     }
 `;
 
 const resolvers = {
     Query: {
-        plantinesCount: () => Plantines.collection.countDocuments(),
-        allPlantines: () => Plantines.find({}),
-        findPlantin: (root, args) => {
+        productsCount: () => Product.collection.countDocuments(),
+        allProducts: () => Product.find({}),
+        findProduct: (root, args) => {
             const { name } = args;
-            return Plantines.findOne({ name });
+            return Product.findOne({ name });
         },
     },
 };
