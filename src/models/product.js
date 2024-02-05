@@ -1,5 +1,5 @@
-const { Schema, model } = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
+import { Schema, model, mongoose } from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
 
 const productSchema = new Schema({
     name: {
@@ -16,10 +16,14 @@ const productSchema = new Schema({
     price: {
         type: Number,
     },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+    },
 });
 
 productSchema.plugin(uniqueValidator);
 
 const Product = model("Product", productSchema);
 
-module.exports = Product;
+export default Product;

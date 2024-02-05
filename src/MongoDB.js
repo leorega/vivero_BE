@@ -1,5 +1,6 @@
-require("dotenv").config();
-const { connect } = require("mongoose");
+import dotenv from "dotenv";
+dotenv.config();
+import { connect } from "mongoose";
 
 const { DB_PASSWORD } = process.env;
 

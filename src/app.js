@@ -1,8 +1,8 @@
-const { ApolloServer } = require("@apollo/server");
-const { startStandaloneServer } = require("@apollo/server/standalone");
-require("./MongoDB");
-const typeDefs = require("./typeDefs");
-const resolvers = require("./resolvers");
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import "./MongoDB.js";
+import typeDefs from "./typeDefs.js";
+import resolvers from "./resolvers.js";
 
 const startServer = async () => {
     const server = new ApolloServer({

@@ -1,5 +1,5 @@
-const { Schema, model } = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
+import { Schema, model } from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
 
 const categorySchema = new Schema({
     name: {
@@ -13,4 +13,4 @@ categorySchema.plugin(uniqueValidator);
 
 const Category = model("Category", categorySchema);
 
-module.exports = Category;
+export default Category;

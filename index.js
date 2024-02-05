@@ -1,3 +1,3 @@
-require("./src/app");
-require("./src/MongoDB");
-require("./src/app");
+import "./src/app.js";
+import "./src/MongoDB.js";
+import "./src/app.js";

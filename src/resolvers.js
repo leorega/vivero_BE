@@ -1,18 +1,42 @@
-const Product = require("./models/product");
+import Product from "./models/product.js";
+import Category from "./models/category.js";
 
 const resolvers = {
     Query: {
+        allCategories: async () => {
+            return await Category.find({});
+        },
         productsCount: () => Product.collection.countDocuments(),
         allProducts: async () => {
-            return await Product.find({});
+            const products = await Product.find({}).populate("category").exec();
+            return products.map((product) => {
+                const category = product.category.name;
+                return {
+                    ...product._doc,
+                    id: product._id,
+                    category: category,
+                };
+            });
         },
         findProduct: async (root, args) => {
             const { name } = args;
-            return await Product.findOne({ name });
+            const product = await Product.findOne({ name })
+                .populate("category")
+                .exec();
+            const category = product.category.name;
+            return {
+                ...product._doc,
+                id: product._id,
+                category: category,
+            };
         },
     },
     Mutation: {
-        addProduct: (root, args) => {
+        addCategory: (root, args) => {
+            const category = new Category(args);
+            return category.save();
+        },
+        addProduct: async (root, args) => {
             const product = new Product({ ...args });
             return product.save();
         },
@@ -32,4 +56,4 @@ const resolvers = {
     },
 };
 
-module.exports = resolvers;
+export default resolvers;
