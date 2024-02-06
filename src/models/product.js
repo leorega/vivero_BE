@@ -20,6 +20,10 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Category",
     },
+    image: {
+        public_id: String,
+        url: String,
+    },
 });
 
 productSchema.plugin(uniqueValidator);

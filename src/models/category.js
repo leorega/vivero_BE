@@ -7,6 +7,10 @@ const categorySchema = new Schema({
         required: true,
         unique: true,
     },
+    image: {
+        public_id: String,
+        url: String,
+    },
 });
 
 categorySchema.plugin(uniqueValidator);

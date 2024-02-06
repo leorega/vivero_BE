@@ -1,14 +1,20 @@
 const typeDefs = `#graphql
 
+    type Image {
+        public_id: String,
+        url: String,
+    }
+
     type Category {
         name: String!
         id: ID
+        image: Image
     }
 
     type Product {
         name: String!
         description: String
-        image: String
+        image: Image
         price: Float
         id: ID
         category: String
@@ -21,14 +27,20 @@ const typeDefs = `#graphql
         findProduct (name:String!): Product
     }
 
+    input ImageInput {
+        public_id: String
+        url: String
+    }
+
     type Mutation {
         addCategory (
             name: String!
+            image: ImageInput!
         ): Category
         addProduct (
             name: String!
             description: String
-            image: String
+            image: ImageInput!
             price: Float 
             category: ID!       
         ): Product
