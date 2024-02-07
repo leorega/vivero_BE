@@ -8,8 +8,10 @@ const categorySchema = new Schema({
         unique: true,
     },
     image: {
-        public_id: String,
-        url: String,
+        url: {
+            type: String,
+            required: true,
+        },
     },
 });
 

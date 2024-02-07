@@ -1,5 +1,6 @@
 import Product from "./models/product.js";
 import Category from "./models/category.js";
+import { uploadImage, deleteImage } from "./utils/cloudinary.js";
 
 const resolvers = {
     Query: {
@@ -32,8 +33,17 @@ const resolvers = {
         },
     },
     Mutation: {
-        addCategory: (root, args) => {
-            const category = new Category(args);
+        addCategory: async (root, args) => {
+            const { name, image } = args;
+
+            const uploadedImage = await uploadImage(image);
+            console.log(uploadedImage);
+            const category = new Category({
+                name,
+                image: {
+                    url: uploadedImage.secure_url,
+                },
+            });
             return category.save();
         },
         addProduct: async (root, args) => {
