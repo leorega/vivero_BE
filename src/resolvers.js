@@ -37,7 +37,7 @@ const resolvers = {
             const { name, image } = args;
 
             const uploadedImage = await uploadImage(image);
-            console.log(uploadedImage);
+
             const category = new Category({
                 name,
                 image: {
